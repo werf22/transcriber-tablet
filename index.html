@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Transcriber</title>
+  <meta name="description" content="Prepis reči na text cez ElevenLabs Scribe — verzia pre tablet.">
+  <meta name="theme-color" content="#1f6feb">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><img src="icons/icon-192.png" alt=""><span>Transcriber</span></div>
+    <div class="topbar-right">
+      <span id="api-status" class="chip">API: neoverené</span>
+      <button id="btn-key" class="btn">API kľúč</button>
+    </div>
+  </header>
+
+  <nav class="toolbar">
+    <label class="btn btn-accent file-btn">
+      ＋ Pridať súbory
+      <input id="file-input" type="file" multiple accept="audio/*,video/*,.m4a,.mp3,.wav,.flac,.ogg,.opus,.aac,.aiff,.aif,.webm,.mp4,.mkv,.mov,.avi,.wmv,.flv,.mpeg,.mpg,.3gp,.3gpp,.amr,.m4b">
+    </label>
+    <button id="btn-start-all" class="btn btn-primary">▶ Spustiť všetko</button>
+    <button id="btn-stop-all" class="btn">◼ Zastaviť všetko</button>
+    <div class="stepper" title="Koľko súborov sa nahráva naraz">
+      <span>Naraz:</span>
+      <button id="conc-minus" class="btn btn-icon" aria-label="Menej">−</button>
+      <output id="conc-value">4</output>
+      <button id="conc-plus" class="btn btn-icon" aria-label="Viac">＋</button>
+    </div>
+    <button id="btn-clear-done" class="btn">Odstrániť hotové</button>
+  </nav>
+
+  <main class="layout">
+    <section class="pane queue-pane" aria-label="Fronta">
+      <div class="pane-head">
+        <h2>Fronta</h2>
+        <span id="overall" class="muted"></span>
+      </div>
+      <div class="selection-bar">
+        <label class="check"><input type="checkbox" id="select-all"> Označiť všetko</label>
+        <button id="btn-start-sel" class="btn btn-small">Spustiť označené</button>
+        <button id="btn-cancel-sel" class="btn btn-small">Zrušiť označené</button>
+        <button id="btn-remove-sel" class="btn btn-small btn-danger">Odstrániť</button>
+      </div>
+      <ul id="queue" class="queue"></ul>
+      <div id="empty" class="empty">
+        <p><strong>Zatiaľ žiadne súbory.</strong></p>
+        <p>Ťukni na „Pridať súbory“, alebo v inej aplikácii (napr. Diktafón) daj Zdieľať → Transcriber.</p>
+      </div>
+    </section>
+
+    <section class="pane detail-pane">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="settings" role="tab">Nastavenia</button>
+        <button class="tab" data-tab="preview" role="tab">Náhľad a rečníci</button>
+        <button class="tab" data-tab="export" role="tab">Export</button>
+      </div>
+      <div id="tab-settings" class="tab-body"></div>
+      <div id="tab-preview" class="tab-body" hidden></div>
+      <div id="tab-export" class="tab-body" hidden></div>
+    </section>
+  </main>
+
+  <footer class="statusbar"><span id="status">Pripravené.</span><span id="version" class="muted"></span></footer>
+
+  <dialog id="key-dialog">
+    <form method="dialog" class="dialog">
+      <h3>ElevenLabs API kľúč</h3>
+      <p class="muted">Kľúč ostáva iba v tomto tablete a posiela sa len priamo do api.elevenlabs.io.</p>
+      <input id="key-input" type="password" autocomplete="off" spellcheck="false" placeholder="sk_…">
+      <label class="check"><input type="checkbox" id="key-show"> Zobraziť kľúč</label>
+      <div class="dialog-actions">
+        <button value="cancel" class="btn">Zrušiť</button>
+        <button id="key-save" value="save" class="btn btn-primary">Uložiť a overiť</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="confirm-dialog">
+    <form method="dialog" class="dialog">
+      <p id="confirm-text"></p>
+      <div class="dialog-actions">
+        <button value="no" class="btn">Nie</button>
+        <button value="yes" class="btn btn-primary">Áno</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
