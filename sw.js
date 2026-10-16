@@ -6,7 +6,7 @@
 //        tests/pwa.test.mjs fails if a file in web/ is missing from it.
 import { stash } from "./js/share-db.js";
 
-const CACHE = "transcriber-v1";
+const CACHE = "transcriber-v2";
 const NETWORK_TIMEOUT_MS = 3000; // knob: how long to wait for the net before using the cache
 const SHELL = [
   "./", "index.html", "manifest.webmanifest", "css/app.css",
