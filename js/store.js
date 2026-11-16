@@ -24,6 +24,11 @@ export function loadConfig() {
   try {
     const raw = localStorage.getItem(CONFIG_KEY);
     if (raw) deepUpdate(merged, JSON.parse(raw));
+    // One-time switch to Scribe v3 (2026-11-16); the flag keeps a later manual pick of v2 intact.
+    if (!merged.model_v3_migrated) {
+      if (!merged.settings.model_id || merged.settings.model_id === "scribe_v2") merged.settings.model_id = "scribe_v3";
+      merged.model_v3_migrated = true;
+    }
   } catch (e) {
     log.error("Config unreadable — using defaults", { error: e });
   }

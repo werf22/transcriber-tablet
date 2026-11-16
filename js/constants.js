@@ -49,7 +49,7 @@ export const LANGUAGES = [
   ["Wolof", "wol"], ["Xhosa", "xho"], ["Zulu", "zul"],
 ];
 
-export const MODELS = [["Scribe v2 (odporúčaný)", "scribe_v2"], ["Scribe v1", "scribe_v1"]];
+export const MODELS = [["Scribe v3 (odporúčaný)", "scribe_v3"], ["Scribe v2", "scribe_v2"], ["Scribe v1", "scribe_v1"]];
 export const FILE_FORMATS = [["Automaticky (other)", "other"], ["Raw PCM 16-bit 16 kHz", "pcm_s16le_16"]];
 export const TIMESTAMPS = [["žiadne", "none"], ["slová", "word"], ["znaky", "character"]];
 export const REDACTION_MODES = ["enumerated_entity_type", "entity_type", "redacted"];
@@ -64,7 +64,7 @@ export const RETRY_MAX_DELAY_SEC = 300;  // knob
 export const NON_RETRIABLE_STATUS = new Set([400, 401, 402, 403, 404, 405, 413, 415, 422]);
 
 export const DEFAULT_SETTINGS = Object.freeze({
-  model_id: "scribe_v2",
+  model_id: "scribe_v3",
   language_code: null,
   num_speakers: null,
   diarize: true,

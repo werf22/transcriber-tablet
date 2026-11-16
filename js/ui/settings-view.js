@@ -54,14 +54,14 @@ export class SettingsView {
       h("fieldset.section", {}, h("legend", {}, "Výstup prepisu"),
         this.check("s-events", "Označovať zvuky (smiech, potlesk…)", s.tag_audio_events),
         this.field("Časové značky", this.select("s-ts", TIMESTAMPS, s.timestamps_granularity)),
-        this.check("s-noverb", "Bez vyplňovacích slov (len Scribe v2)", s.no_verbatim)),
+        this.check("s-noverb", "Bez vyplňovacích slov (len Scribe v2/v3)", s.no_verbatim)),
       h("fieldset.section", {}, h("legend", {}, "Pokročilé"),
         this.field("Teplota (0,0 – 2,0)", this.input("s-temp", s.temperature, { inputMode: "decimal", placeholder: "predvolené" })),
         this.field("Seed (opakovateľný výstup)", this.input("s-seed", s.seed, { inputMode: "numeric" })),
         this.check("s-multi", "Viackanálový režim (max 5 kanálov, limit 1 h)", s.use_multi_channel),
         this.field("Formát vstupu", this.select("s-ff", FILE_FORMATS, s.file_format)),
         this.check("s-logging", "Logovanie na strane ElevenLabs (VYP = zero-retention)", s.enable_logging)),
-      h("fieldset.section", {}, h("legend", {}, "Kľúčové výrazy (Scribe v2, max 1000; +20 % cena)"),
+      h("fieldset.section", {}, h("legend", {}, "Kľúčové výrazy (Scribe v2/v3, max 1000; +20 % cena)"),
         h("p.muted", {}, "Jeden výraz na riadok ALEBO oddelené čiarkou. Mená, názvy produktov, zriedkavé slová."),
         h("textarea", { id: "s-keyterms", value: (s.keyterms || []).join("\n"), spellcheck: false })),
       h("fieldset.section", {}, h("legend", {}, "Detekcia a začiernenie entít (+30 % cena)"),
@@ -83,7 +83,7 @@ export class SettingsView {
     const v = (id) => $(`#${id}`, this.root).value;
     const c = (id) => $(`#${id}`, this.root).checked;
     return {
-      model_id: v("s-model") || "scribe_v2",
+      model_id: v("s-model") || "scribe_v3",
       language_code: v("s-lang") || null,
       num_speakers: parseIntOrNull(v("s-num")),
       diarize: c("s-diarize"),

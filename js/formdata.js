@@ -38,7 +38,7 @@ export function buildFormFields(settings) {
     data.push([key, String(value)]);
   };
 
-  add("model_id", settings.model_id || "scribe_v2");
+  add("model_id", settings.model_id || "scribe_v3");
   add("language_code", settings.language_code);
   add("tag_audio_events", settings.tag_audio_events);
 
@@ -70,7 +70,7 @@ export function buildFormFields(settings) {
   }
 
   add("use_multi_channel", settings.use_multi_channel);
-  if (settings.model_id === "scribe_v2") add("no_verbatim", settings.no_verbatim);
+  if (settings.model_id === "scribe_v2" || settings.model_id === "scribe_v3") add("no_verbatim", settings.no_verbatim);
   add("detect_speaker_roles", settings.detect_speaker_roles);
 
   const ff = settings.file_format;
